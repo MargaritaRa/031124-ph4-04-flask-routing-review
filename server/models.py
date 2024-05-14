@@ -14,5 +14,19 @@ db = SQLAlchemy(metadata=metadata)
 # likes -> int
 # #############
 
-class Meme():
-    pass
+class Meme(db.Model):
+    
+    __tablename__ = "meme-table"
+
+    id = db.Column(db.Integer, primary_key=True)
+    img_url = db.Column(db.String)
+    caption = db.Column(db.String)
+    likes = db.Column(db.Integer, default=0)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "img_url": self.img_url,
+            "caption": self.caption,
+            "likes": self.likes
+        }
